@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;
+import com.example.demo.exception.ErrorCode;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.repository.UserRepository;
@@ -33,7 +34,7 @@ public class UserServiceimpl implements UserService {
     public UserDto getUserById(Integer userId) {
         Optional<User> user = userRepository.findById(userId);
         if (!user.isPresent())
-            throw new NotFoundException(Constants.ID_NOT_FOUND);
+            throw new NotFoundException(Constants.ID_NOT_FOUND, ErrorCode.NOT_FOUND);
         return userMapper.toDTO(user.get());
     }
 
